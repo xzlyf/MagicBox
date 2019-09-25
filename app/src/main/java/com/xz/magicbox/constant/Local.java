@@ -1,5 +1,7 @@
 package com.xz.magicbox.constant;
 
+import android.Manifest;
+
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 public class Local {
@@ -10,5 +12,9 @@ public class Local {
     public static final int TYPE_NOTHING = QMUITipDialog.Builder.ICON_TYPE_NOTHING;//不显示任何
     public static final int TYPE_SUCCESS = QMUITipDialog.Builder.ICON_TYPE_SUCCESS;//成功
 
-
+    //待申请权限列表
+    public static final String[] permission = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
 }

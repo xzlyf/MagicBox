@@ -14,4 +14,8 @@
         android:onClick="codeBuilder"
         android:text="二维码生成器"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
 </LinearLayout>

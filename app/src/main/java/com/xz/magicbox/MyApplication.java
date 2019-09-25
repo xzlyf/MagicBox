@@ -1,7 +1,13 @@
 package com.xz.magicbox;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.orhanobut.logger.Logger;
 
@@ -19,27 +25,32 @@ public class MyApplication extends Application {
         initLog();
     }
 
+
+
     private void initLog() {
         Logger.init();
     }
 
-    public static MyApplication getInstance(){
+    public static MyApplication getInstance() {
         return instance;
     }
+
     /**
      * 新建了一个activity
+     *
      * @param activity
      */
-    public void addActivity(Activity activity){
+    public void addActivity(Activity activity) {
         activities.add(activity);
     }
 
     /**
-     *  结束指定的Activity
+     * 结束指定的Activity
+     *
      * @param activity
      */
-    public void finishActivity(Activity activity){
-        if (activity!=null) {
+    public void finishActivity(Activity activity) {
+        if (activity != null) {
             this.activities.remove(activity);
             activity.finish();
             activity = null;
@@ -49,9 +60,9 @@ public class MyApplication extends Application {
     /**
      * 应用退出，结束所有的activity
      */
-    public void exit(){
+    public void exit() {
         for (Activity activity : activities) {
-            if (activity!=null) {
+            if (activity != null) {
                 activity.finish();
             }
         }
@@ -59,8 +70,9 @@ public class MyApplication extends Application {
     }
 
     /**
-     * 关闭Activity列表中的所有Activity*/
-    public void finishActivity(){
+     * 关闭Activity列表中的所有Activity
+     */
+    public void finishActivity() {
         for (Activity activity : activities) {
             if (null != activity) {
                 activity.finish();

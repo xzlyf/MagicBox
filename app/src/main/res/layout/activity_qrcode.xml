@@ -71,7 +71,8 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/biankuan"
             android:gravity="start"
-            android:hint="在此输入内容，网址、文本均可支持"
+            android:hint="魔盒，一个多功能的盒子"
+            android:maxLength="500"
             android:minHeight="150dp"
             android:padding="5dp" />
 

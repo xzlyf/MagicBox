@@ -59,7 +59,7 @@ public class QRCodeActivity extends BaseActivity {
     @Override
     protected void initData() {
         setTitle("二维码生成器");
-        bitmap = ZXingQRUtils.createQRimg("魔盒——非凡自我", 512, 512);
+        bitmap = ZXingQRUtils.createQRimg("魔盒，一个多功能的盒子", 512, 512);
         getScreenHW();
         //默认显示
         imgPreView.setImageBitmap(bitmap);//二维码
