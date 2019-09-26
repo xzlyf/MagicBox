@@ -1,8 +1,6 @@
 package com.xz.magicbox.activity;
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,20 +10,34 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.xz.magicbox.R;
+import com.xz.magicbox.activity.zhihu.DailyRe;
+import com.xz.magicbox.adapter.FunctionAdapter;
 import com.xz.magicbox.base.BaseActivity;
 import com.xz.magicbox.constant.Local;
+import com.xz.magicbox.entity.Func;
+import com.xz.magicbox.utils.SpacesItemDecorationVH;
+import com.xz.magicbox.utils.SpacesItemDecorationVertical;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
+    private FunctionAdapter adapter;
 
+    @BindView(R.id.function_list)
+    RecyclerView functionList;
 
     @Override
     protected int getLayoutResource() {
@@ -40,6 +52,24 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
         initPermission();
+
+        initRecycler();
+
+    }
+
+    private void initRecycler() {
+
+        adapter = new FunctionAdapter(this);
+        functionList.setLayoutManager(new LinearLayoutManager(this));
+        functionList.setAdapter(adapter);
+        functionList.addItemDecoration(new SpacesItemDecorationVertical(10));
+        List<Func> list = new ArrayList<>();
+        list.add(new Func("二维码生成器",QRCodeActivity.class));
+        list.add(new Func("知乎日报", DailyRe.class));
+        list.add(new Func("测试BBBB",QRCodeActivity.class));
+        list.add(new Func("测试CCCC",QRCodeActivity.class));
+        adapter.refresh(list);
+
     }
 
     /**
@@ -57,7 +87,7 @@ public class MainActivity extends BaseActivity {
                 }
             }
 
-            if (isExits){
+            if (isExits) {
 
                 AlertDialog dialog = new AlertDialog.Builder(this)
                         .setTitle("温馨提示")
@@ -97,11 +127,11 @@ public class MainActivity extends BaseActivity {
 
         if (requestCode == 456) {
             for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     //成功
-                }else{
+                } else {
                     //失败
-                    Toast.makeText(this, permissions[i]+"权限申请失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, permissions[i] + "权限申请失败", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -109,7 +139,5 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    public void codeBuilder(View view) {
-        startActivity(new Intent(this, QRCodeActivity.class));
-    }
+
 }

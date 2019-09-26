@@ -16,6 +16,7 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.zhihu.DailyRe"></activity>
         <activity android:name=".activity.QRCodeActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>

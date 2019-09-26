@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <Button
-        style="@style/Widget.AppCompat.ActionButton"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:onClick="codeBuilder"
-        android:text="二维码生成器"/>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_gravity="center"
+        android:id="@+id/function_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:overScrollMode="never"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

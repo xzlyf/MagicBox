@@ -21,6 +21,7 @@ import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xz.magicbox.BuildConfig;
 import com.xz.magicbox.R;
 import com.xz.magicbox.base.BaseActivity;
+import com.xz.magicbox.constant.Local;
 import com.xz.magicbox.utils.ZXingQRUtils;
 
 import java.io.File;
@@ -41,8 +42,7 @@ public class QRCodeActivity extends BaseActivity {
     EditText content;
     @BindView(R.id.submit)
     Button submit;
-    private int width;//屏幕尺寸
-    private int height;//屏幕尺寸
+
     private Bitmap bitmap;
     private String path = "";
 
@@ -74,8 +74,8 @@ public class QRCodeActivity extends BaseActivity {
         WindowManager manager = this.getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
-        width = outMetrics.widthPixels;
-        height = outMetrics.heightPixels;
+        Local.width = outMetrics.widthPixels;
+        Local.height = outMetrics.heightPixels;
     }
 
     @OnClick(R.id.submit)

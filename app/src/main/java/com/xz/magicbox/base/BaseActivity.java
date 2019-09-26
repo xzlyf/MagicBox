@@ -11,7 +11,10 @@ import android.widget.EditText;
 
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.xz.magicbox.MyApplication;
+import com.xz.magicbox.activity.contract.BaseView;
 import com.xz.magicbox.constant.Local;
+import com.xz.magicbox.custom.LoadingDialog;
+import com.xz.magicbox.custom.TipsDialog;
 import com.xz.magicbox.utils.ToastUtil;
 
 import java.util.Timer;
@@ -19,9 +22,15 @@ import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends AppCompatActivity {
-    private QMUITipDialog tipDialog;
-    private Timer t;
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+    private TipsDialog tipDialog;
+    private LoadingDialog loadingDialog;
+
+    abstract protected int getLayoutResource();
+
+    abstract protected boolean homeAsUpEnabled();
+
+    protected abstract void initData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResource());
         ButterKnife.bind(this);
         //设置是否开启返回homeAsUp按钮
-        if (homeAsUpEnabled()){
+        if (homeAsUpEnabled()) {
             ActionBar bar = getSupportActionBar();
             if (bar != null) {
                 bar.setHomeButtonEnabled(true);
@@ -37,8 +46,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         initData();
-
-
 
 
     }
@@ -60,16 +67,81 @@ public abstract class BaseActivity extends AppCompatActivity {
         MyApplication.getInstance().finishActivity(this);
     }
 
+    @Override
     public void sToast(String text) {
         ToastUtil.Shows(this, text);
     }
 
+    @Override
     public void lToast(String text) {
         ToastUtil.Shows_LONG(this, text);
     }
 
+    @Override
+    public void showLoading(String text) {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+        }
+        loadingDialog = new LoadingDialog.Builder(this)
+                .setTitle("加载中...")
+                .setIcon(Local.TYPE_LOADING_2)
+                .setCancelOnClickListeren(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        loadingDialog.dismiss();
+                    }
+                })
+                .create();
+        loadingDialog.setCancelable(false);
+        loadingDialog.show();
+    }
+
+    @Override
+    public void disLoading() {
+        if (tipDialog != null || tipDialog.isShowing()) {
+            tipDialog.dismiss();
+        }
+    }
+
+    /**
+     * 显示一个对话框，并指定类型
+     *
+     * @param msg
+     * @param type
+     */
+    @Override
+    public void sDialog(String title, String msg, int type) {
+        if (tipDialog != null) {
+            tipDialog.dismiss();
+        }
+        tipDialog = new TipsDialog.Builder(this)
+                .setTitle(title)
+                .setMeg(msg)
+                .setIcon(type)
+                .create();
+        tipDialog.show();
+
+    }
+
+    /**
+     * 销毁对话框
+     */
+    @Override
+    public void dDialog() {
+        if (tipDialog == null) {
+            return;
+        }
+        if (tipDialog.isShowing())
+            tipDialog.dismiss();
+        if (tipDialog != null) {
+            tipDialog = null;
+        }
+    }
+
+
     /**
      * 自动隐藏软键盘
+     *
      * @param ev
      * @return
      */
@@ -124,51 +196,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * 显示一个对话框，并指定类型
-     *
-     * @param msg
-     * @param type
-     */
-    public void sDialog(String msg, int type) {
-        if (msg.trim().equals(""))
-            msg = "正在加载...";
-        //如果不是加载对话，自动两秒后关闭对话框
-        if (type != Local.TYPE_LOADING) {
-            t = new Timer();
-            t.schedule(new TimerTask() {
-                public void run() {
-                    tipDialog.dismiss();
-                    t.cancel();
-                }
-            }, 2000);
 
-        }
-        tipDialog = new QMUITipDialog.Builder(this)
-                .setIconType(type)
-                .setTipWord(msg)
-                .create();
-        tipDialog.show();
-
-
-    }
-
-    /**
-     * 销毁对话框
-     */
-    public void dDialog() {
-        if (tipDialog == null) {
-            return;
-        }
-        if (tipDialog.isShowing())
-            tipDialog.dismiss();
-        if (tipDialog != null) {
-            tipDialog = null;
-        }
-    }
-
-    abstract protected int getLayoutResource();
-    abstract protected boolean homeAsUpEnabled();
-
-    protected abstract void initData();
 }

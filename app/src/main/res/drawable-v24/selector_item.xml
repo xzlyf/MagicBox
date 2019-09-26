@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:state_pressed="false">
+        <shape>
+            <solid android:color="@color/transparency" />
+            <!-- 这里是设置为四周 也可以单独设置某个位置为圆角-->
+            <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp" android:topLeftRadius="5dp" android:topRightRadius="5dp" />
+            <stroke android:width="2dp" android:color="#8B8B8B" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <ripple  android:color="#EEE2BC">
+            <item android:drawable="@drawable/ripple" />
+        </ripple>
+    </item>
+</selector>
