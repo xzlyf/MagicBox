@@ -45,4 +45,6 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
     //Glide框架
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    //jsoup HTML解析器
+    implementation 'org.jsoup:jsoup:1.11.3'
 }

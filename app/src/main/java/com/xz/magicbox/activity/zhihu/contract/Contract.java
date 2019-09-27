@@ -2,6 +2,9 @@ package com.xz.magicbox.activity.zhihu.contract;
 
 import com.xz.magicbox.activity.contract.BaseView;
 import com.xz.magicbox.custom.OnModelCallback;
+import com.xz.magicbox.entity.News;
+
+import java.util.List;
 
 public interface Contract {
     interface Model {
@@ -10,7 +13,7 @@ public interface Contract {
     }
 
     interface View extends BaseView {
-        void showDaily();
+        void showNews(List<News> list);
     }
 
     interface Presenter {

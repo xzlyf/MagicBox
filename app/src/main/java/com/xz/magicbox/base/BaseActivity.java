@@ -1,6 +1,8 @@
 package com.xz.magicbox.base;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -9,16 +11,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.xz.magicbox.MyApplication;
 import com.xz.magicbox.activity.contract.BaseView;
 import com.xz.magicbox.constant.Local;
 import com.xz.magicbox.custom.LoadingDialog;
 import com.xz.magicbox.custom.TipsDialog;
 import com.xz.magicbox.utils.ToastUtil;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 
@@ -31,6 +29,29 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     abstract protected boolean homeAsUpEnabled();
 
     protected abstract void initData();
+
+    private final int SHOWD = 111;
+    private final int STOAST = 112;
+    private final int LTOAST = 113;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case SHOWD:
+                    String[] ary = (String[]) msg.obj;
+                    _showDialog(ary[0], ary[1], msg.arg1);
+                    break;
+                case STOAST:
+                    _shortToast((String) msg.obj);
+                    break;
+                case LTOAST:
+                    _longToast((String) msg.obj);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +90,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void sToast(String text) {
-        ToastUtil.Shows(this, text);
+        //使用Handler回到主线程操作
+        Message message = handler.obtainMessage();
+        message.what = STOAST;
+        message.obj = text;
+        handler.sendMessage(message);
     }
 
     @Override
     public void lToast(String text) {
-        ToastUtil.Shows_LONG(this, text);
+        //使用Handler回到主线程操作
+        Message message = handler.obtainMessage();
+        message.what = LTOAST;
+        message.obj = text;
+        handler.sendMessage(message);
     }
 
     @Override
@@ -98,8 +127,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void disLoading() {
-        if (tipDialog != null || tipDialog.isShowing()) {
-            tipDialog.dismiss();
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+            loadingDialog = null;
         }
     }
 
@@ -111,16 +141,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     @Override
     public void sDialog(String title, String msg, int type) {
-        if (tipDialog != null) {
-            tipDialog.dismiss();
-        }
-        tipDialog = new TipsDialog.Builder(this)
-                .setTitle(title)
-                .setMeg(msg)
-                .setIcon(type)
-                .create();
-        tipDialog.show();
-
+        //使用Handler回到主线程操作
+        Message message = handler.obtainMessage();
+        message.what = SHOWD;
+        message.arg1 = type;
+        message.obj = new String[]{title, msg};
+        handler.sendMessage(message);
     }
 
     /**
@@ -136,6 +162,45 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (tipDialog != null) {
             tipDialog = null;
         }
+    }
+
+    /**
+     * UI线程操作，显示对话框
+     *
+     * @param title
+     * @param msg
+     * @param type
+     */
+    private void _showDialog(String title, String msg, int type) {
+
+        if (tipDialog != null) {
+            tipDialog.dismiss();
+        }
+        tipDialog = new TipsDialog.Builder(this)
+                .setTitle(title)
+                .setMeg(msg)
+                .setIcon(type)
+                .create();
+        tipDialog.show();
+
+    }
+
+    /**
+     * UI现场操作，显示短Toast
+     *
+     * @param text
+     */
+    private void _shortToast(String text) {
+        ToastUtil.Shows(this, text);
+    }
+
+    /**
+     * UI现场操作，显示短Toast
+     *
+     * @param text
+     */
+    private void _longToast(String text) {
+        ToastUtil.Shows_LONG(this, text);
     }
 
 

@@ -32,7 +32,7 @@
         android:layout_marginBottom="20dp"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/blue"
+        android:textColor="@color/blue"
         android:text="取消"
         android:textSize="16dp" />
 
