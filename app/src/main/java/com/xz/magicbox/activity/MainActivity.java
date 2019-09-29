@@ -12,7 +12,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -54,6 +56,7 @@ public class MainActivity extends BaseActivity {
         initPermission();
 
         initRecycler();
+        getScreenHW();
 
     }
 
@@ -139,5 +142,15 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    /**
+     * 获取屏幕尺寸
+     */
+    private void getScreenHW() {
+        WindowManager manager = this.getWindowManager();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        manager.getDefaultDisplay().getMetrics(outMetrics);
+        Local.width = outMetrics.widthPixels;
+        Local.height = outMetrics.heightPixels;
+    }
 
 }

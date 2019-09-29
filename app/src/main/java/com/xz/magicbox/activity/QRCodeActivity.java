@@ -60,23 +60,12 @@ public class QRCodeActivity extends BaseActivity {
     protected void initData() {
         setTitle("二维码生成器");
         bitmap = ZXingQRUtils.createQRimg("魔盒，一个多功能的盒子", 512, 512);
-        getScreenHW();
         //默认显示
         imgPreView.setImageBitmap(bitmap);//二维码
 //        imgPreView.setImageBitmap(ZXingQRUtils.creatBarcode(this, "4461231321", 1024, 512, true));//条形码
 
     }
 
-    /**
-     * 获取屏幕尺寸
-     */
-    private void getScreenHW() {
-        WindowManager manager = this.getWindowManager();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(outMetrics);
-        Local.width = outMetrics.widthPixels;
-        Local.height = outMetrics.heightPixels;
-    }
 
     @OnClick(R.id.submit)
     public void submit() {

@@ -29,5 +29,9 @@ public class Local {
 
     //知乎接口
     public static final String GET_DAIYL_NEWS = "https://news-at.zhihu.com/api/4/news/latest";//日报api
-    public static final String GET_DAIYL_DETAIL = "https://news-at.zhihu.com/api/4/news/";//日报详情
+    public static final String GET_DAIYL_CONTENT = "https://news-at.zhihu.com/api/4/news/";//日报内容
+    public static final String GET_DAIYL_DETAIL = "https://news-at.zhihu.com/api/4/story-extra/";//日报细节
+    public static final String GET_CONTENT_COMMENT = "https://news-at.zhihu.com/api/4/story/";//文章评论
+    public static final String GET_CONTENT_COMMENT_TAIL = "/short-comments";//文章评论_尾部
+
 }

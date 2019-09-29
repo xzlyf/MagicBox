@@ -15,7 +15,6 @@ import java.util.TimerTask;
 public class Model implements Contract.Model {
     private String TAG = "Dayily.Model";
 
-    private NetUtil net = new NetUtil();
 
     /**
      * 获取日报数据
@@ -26,7 +25,7 @@ public class Model implements Contract.Model {
             @Override
             public void run() {
 
-                net.get_Sync(Local.GET_DAIYL_NEWS, new OnRequestListener() {
+                NetUtil.get_Sync(Local.GET_DAIYL_NEWS, new OnRequestListener() {
 
                     @Override
                     public void onSuccess(String body, String header) {

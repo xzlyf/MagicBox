@@ -28,7 +28,7 @@ public class NetUtil {
     //    private final long cacheSize = 1024 * 1024 * 20;//缓存文件限制20m
 //    private String cachedirectory = "/caches";  //设置缓存文件路径
 //    private Cache cache = new Cache(new File(cachedirectory), cacheSize);
-    private OkHttpClient client;
+    private static OkHttpClient client;
 
     /**
      * 异步get请求
@@ -36,7 +36,7 @@ public class NetUtil {
      * @param url
      * @param callback
      */
-    public void get_Asyn(String url, Callback callback) {
+    public static void get_Asyn(String url, Callback callback) {
         client = new OkHttpClient();
         client.newBuilder()
                 .readTimeout(10, TimeUnit.SECONDS)
@@ -54,7 +54,7 @@ public class NetUtil {
      *
      * @param url
      */
-    public void get_Sync(String url, OnRequestListener listener) {
+    public static void get_Sync(String url, OnRequestListener listener) {
 
 
         client = new OkHttpClient();
@@ -91,7 +91,7 @@ public class NetUtil {
      * @param parmars
      * @param callback
      */
-    public void post_Asyn(String url, Map<String, String> parmars, Callback callback) {
+    public static void post_Asyn(String url, Map<String, String> parmars, Callback callback) {
 
         client = new OkHttpClient();
         client.newBuilder()
@@ -116,7 +116,7 @@ public class NetUtil {
      * @param locationPath 下载存储位置
      * @param listener
      */
-    public void download_Asyn(String url, final String locationPath, final OnLoadCompleteListener listener) {
+    public static void download_Asyn(String url, final String locationPath, final OnLoadCompleteListener listener) {
         client = new OkHttpClient();
         client.newBuilder()
                 .readTimeout(10, TimeUnit.SECONDS)
