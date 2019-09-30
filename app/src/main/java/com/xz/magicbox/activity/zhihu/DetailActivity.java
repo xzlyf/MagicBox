@@ -1,10 +1,10 @@
 package com.xz.magicbox.activity.zhihu;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -12,14 +12,13 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.xz.magicbox.R;
 import com.xz.magicbox.adapter.CommentAdapter;
@@ -59,11 +58,15 @@ public class DetailActivity extends BaseActivity {
     RecyclerView commList;
     @BindView(R.id.check_comm)
     Button checkComm;
-
+    @BindView(R.id.scroll)
+    NestedScrollView scroll;
+    private CommentAdapter adapter;
     private String id;
     private final int CONTENT = 98;
     private final int TIELE = 99;
     private final int DETAIL = 100;
+    private final int COMMENT = 101;
+    private boolean ishowComment = true;
 
     private Handler handler = new Handler() {
         @Override
@@ -77,6 +80,9 @@ public class DetailActivity extends BaseActivity {
                     break;
                 case DETAIL:
                     _showDetails(msg.arg1, msg.arg2);
+                    break;
+                case COMMENT:
+                    _showComm((List<Comment>) msg.obj);
                     break;
             }
         }
@@ -97,6 +103,9 @@ public class DetailActivity extends BaseActivity {
     protected void initData() {
         id = getIntent().getStringExtra("id");
         body.setLinkTextColor(getColor(R.color.blue));
+        commList.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new CommentAdapter(this);
+        commList.setAdapter(adapter);
 
         showLoading("正在获取文章内容");
         getNetData();
@@ -123,6 +132,18 @@ public class DetailActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (!ishowComment){
+            body.setVisibility(View.VISIBLE);
+            commList.setVisibility(View.GONE);
+            checkComm.setText("查看评论");
+            ishowComment = true;
+
+        }else{
+            super.onBackPressed();
+        }
+    }
 
     /**
      * 查看评论按钮
@@ -132,46 +153,54 @@ public class DetailActivity extends BaseActivity {
     @OnClick(R.id.check_comm)
     public void showRecycler(View v) {
 
-        commList.setLayoutManager(new LinearLayoutManager(this));
-        CommentAdapter adapter = new CommentAdapter(this);
-        commList.setAdapter(adapter);
+        if (ishowComment){
 
-        NetUtil.get_Asyn(Local.GET_CONTENT_COMMENT + id + Local.GET_CONTENT_COMMENT_TAIL, new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                sToast("获取评论失败，请稍后重试！");
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String json = response.body().string();
-                List<Comment> mlist = new ArrayList<>();
-                try {
-                    JSONObject obj = new JSONObject(json);
-                    JSONArray obj2 = obj.getJSONArray("comments");
-                    Comment comment;
-                    JSONObject obj3;
-                    for (int i = 0; i < obj2.length(); i++) {
-                        obj3 = obj2.getJSONObject(i);
-                        comment = new Comment();
-                        comment.setAuthor(obj3.getString("author"));
-                        comment.setContent(obj3.getString("content"));
-                        comment.setAvatar(obj3.getString("avatar"));
-                        comment.setTime(obj3.getLong("time"));
-                        comment.setId(obj3.getLong("id"));
-                        comment.setLikes(obj3.getInt("likes"));
-                        mlist.add(comment);
-
-                    }
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            NetUtil.get_Asyn(Local.GET_CONTENT_COMMENT + id + Local.GET_CONTENT_COMMENT_TAIL, new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    sToast("获取评论失败，请稍后重试！");
                 }
-            }
-        });
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    String json = response.body().string();
+                    List<Comment> mlist = new ArrayList<>();
+                    try {
+                        JSONObject obj = new JSONObject(json);
+                        JSONArray obj2 = obj.getJSONArray("comments");
+                        Comment comment;
+                        JSONObject obj3;
+                        for (int i = 0; i < obj2.length(); i++) {
+                            obj3 = obj2.getJSONObject(i);
+                            comment = new Comment();
+                            comment.setAuthor(obj3.getString("author"));
+                            comment.setContent(obj3.getString("content"));
+                            comment.setAvatar(obj3.getString("avatar"));
+                            comment.setTime(obj3.getLong("time"));
+                            comment.setId(obj3.getLong("id"));
+                            comment.setLikes(obj3.getInt("likes"));
+                            mlist.add(comment);
+
+                        }
+
+
+                        showComm(mlist);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }else{
+            ishowComment = true;
+            body.setVisibility(View.VISIBLE);
+            commList.setVisibility(View.GONE);
+            checkComm.setText("查看评论");
+        }
+
+
     }
+
 
     /**
      * 获取json数据
@@ -299,6 +328,19 @@ public class DetailActivity extends BaseActivity {
     }
 
 
+    /**
+     * 展示 评论
+     *
+     * @param mlist
+     */
+    private void showComm(List<Comment> mlist) {
+        Message msg = handler.obtainMessage();
+        msg.what = COMMENT;
+        msg.obj = mlist;
+        handler.sendMessage(msg);
+    }
+
+
     private void _showTitle(String t) {
         title.setText(t);
     }
@@ -314,6 +356,15 @@ public class DetailActivity extends BaseActivity {
     private void _showDetails(int like, int comm) {
         likes.setText("点赞：" + like);
         comments.setText("评论：" + comm);
+    }
+
+    private void _showComm(List<Comment> list) {
+        adapter.refresh(list);
+        commList.setVisibility(View.VISIBLE);
+        body.setVisibility(View.GONE);
+        commList.setVisibility(View.VISIBLE);
+        ishowComment = false;
+        checkComm.setText("收起评论");
     }
 
 }

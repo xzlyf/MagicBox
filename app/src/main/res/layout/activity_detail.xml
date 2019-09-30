@@ -7,7 +7,8 @@
     android:orientation="vertical"
     tools:context=".activity.zhihu.DetailActivity">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -58,6 +59,7 @@
                 android:id="@+id/check_comm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/selec_btn"
                 android:text="查看评论"/>
 
             <android.support.v7.widget.RecyclerView
@@ -67,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 
 </LinearLayout>
