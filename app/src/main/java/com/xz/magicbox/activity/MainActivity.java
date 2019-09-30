@@ -2,38 +2,31 @@ package com.xz.magicbox.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.xz.magicbox.R;
+import com.xz.magicbox.activity.qr_code.QRCodeActivity;
+import com.xz.magicbox.activity.system.SysInfoActivity;
 import com.xz.magicbox.activity.zhihu.DailyRe;
 import com.xz.magicbox.adapter.FunctionAdapter;
 import com.xz.magicbox.base.BaseActivity;
 import com.xz.magicbox.constant.Local;
 import com.xz.magicbox.entity.Func;
-import com.xz.magicbox.utils.SpacesItemDecorationVH;
 import com.xz.magicbox.utils.SpacesItemDecorationVertical;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     private FunctionAdapter adapter;
@@ -69,8 +62,8 @@ public class MainActivity extends BaseActivity {
         List<Func> list = new ArrayList<>();
         list.add(new Func("二维码生成器",QRCodeActivity.class));
         list.add(new Func("知乎日报", DailyRe.class));
-        list.add(new Func("测试BBBB",QRCodeActivity.class));
-        list.add(new Func("测试CCCC",QRCodeActivity.class));
+        list.add(new Func("系统信息", SysInfoActivity.class));
+        list.add(new Func("测试CCCC", QRCodeActivity.class));
         adapter.refresh(list);
 
     }

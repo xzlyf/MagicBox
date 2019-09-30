@@ -1,6 +1,6 @@
 package com.xz.magicbox.activity.zhihu.contract;
 
-import com.xz.magicbox.activity.contract.BaseView;
+import com.xz.magicbox.activity.BaseView;
 import com.xz.magicbox.custom.OnModelCallback;
 import com.xz.magicbox.entity.News;
 

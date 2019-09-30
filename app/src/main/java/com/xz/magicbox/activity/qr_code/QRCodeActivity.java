@@ -1,4 +1,4 @@
-package com.xz.magicbox.activity;
+package com.xz.magicbox.activity.qr_code;
 
 import android.content.ComponentName;
 import android.content.Intent;

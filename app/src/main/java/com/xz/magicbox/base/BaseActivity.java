@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.xz.magicbox.MyApplication;
-import com.xz.magicbox.activity.contract.BaseView;
+import com.xz.magicbox.activity.BaseView;
 import com.xz.magicbox.constant.Local;
 import com.xz.magicbox.custom.LoadingDialog;
 import com.xz.magicbox.custom.TipsDialog;
