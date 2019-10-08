@@ -6,11 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activity.system.SysInfoActivity">
 
-    <TextView
-        android:id="@+id/out_panel"
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/out_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

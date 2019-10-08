@@ -14,6 +14,7 @@ public class TimeUtil {
 
 
     /**
+     * 秒级
      * 时间戳→自定义格式时间
      *
      * @return
@@ -21,6 +22,16 @@ public class TimeUtil {
     public static String getSimDate(String pattern, Long time) {
         return new SimpleDateFormat(pattern).format(new Date(Long.parseLong(time+"000")));//秒级转毫秒级
 //        return new SimpleDateFormat(pattern).format(new Date(time));//毫秒级
+    }
+    /**
+     * 毫秒级
+     * 时间戳→自定义格式时间
+     *
+     * @return
+     */
+    public static String getSimMilliDate(String pattern, Long time) {
+//        return new SimpleDateFormat(pattern).format(new Date(Long.parseLong(time+"000")));//秒级转毫秒级
+        return new SimpleDateFormat(pattern).format(new Date(time));//毫秒级
     }
 
     /**

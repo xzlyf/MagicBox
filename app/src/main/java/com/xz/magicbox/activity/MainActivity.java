@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.xz.magicbox.R;
+import com.xz.magicbox.activity.jiami.EncryptionActivity;
 import com.xz.magicbox.activity.qr_code.QRCodeActivity;
 import com.xz.magicbox.activity.system.SysInfoActivity;
 import com.xz.magicbox.activity.zhihu.DailyRe;
@@ -63,7 +64,7 @@ public class MainActivity extends BaseActivity {
         list.add(new Func("二维码生成器",QRCodeActivity.class));
         list.add(new Func("知乎日报", DailyRe.class));
         list.add(new Func("系统信息", SysInfoActivity.class));
-        list.add(new Func("测试CCCC", QRCodeActivity.class));
+        list.add(new Func("加密", EncryptionActivity.class));
         adapter.refresh(list);
 
     }

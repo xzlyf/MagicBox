@@ -58,7 +58,9 @@
             <Button
                 android:id="@+id/check_comm"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/selec_btn"
                 android:text="查看评论"/>
 

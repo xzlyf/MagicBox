@@ -53,7 +53,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.likes.setText(mlist.get(i).getLikes()+"");
-        viewHolder.time.setText(TimeUtil.getSimDate("yyyy-MM-dd-HH:mm:ss",mlist.get(i).getTime()));
+        viewHolder.time.setText(TimeUtil.getSimDate("yyyy-MM-dd HH:mm:ss",mlist.get(i).getTime()));
         viewHolder.userComment.setText(mlist.get(i).getContent());
         viewHolder.userId.setText(mlist.get(i).getAuthor());
         Glide.with(mContext).load(mlist.get(i).getAvatar()).into(viewHolder.userPhoto);

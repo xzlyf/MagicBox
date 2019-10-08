@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="MD5加密"
+            android:textColor="@color/primary_text"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#DBDBDB"
+                android:padding="5dp"
+                android:text="加密前" />
+
+            <TextView
+                android:id="@+id/clear"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="清空"/>
+            <TextView
+                android:id="@+id/copy"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:textColor="@color/qmui_config_color_link"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content"
+                android:text="复制"/>
+            <TextView
+                android:id="@+id/paste"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:textColor="@color/qmui_config_color_link"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content"
+                android:text="粘贴"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/from_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/biankuan"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#DBDBDB"
+            android:padding="5dp"
+            android:text="加密后" />
+
+
+        <com.xz.magicbox.custom.MoreListView
+            android:id="@+id/result_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/morse_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/copy_result"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:textColor="@color/qmui_config_color_link"
+                android:layout_gravity=""
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content"
+                android:text="复制"/>
+            <TextView
+                android:id="@+id/encrypyion_text"
+                android:text=".-/-.../-.-./-.././..-./--./"
+                android:layout_margin="15dp"
+                android:textColor="@color/gory_black"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selec_btn"
+            android:text="加密" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

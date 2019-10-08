@@ -7,9 +7,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取WIFI信息状态的权限 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取网络状态改变的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -19,7 +18,8 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.system.SysInfoActivity"></activity>
+        <activity android:name=".activity.jiami.EncryptionActivity"></activity>
+        <activity android:name=".activity.system.SysInfoActivity" />
         <activity android:name=".activity.zhihu.DetailActivity" />
         <activity android:name=".activity.zhihu.DailyRe" />
         <activity android:name=".activity.qr_code.QRCodeActivity" />
