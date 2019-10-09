@@ -17,6 +17,7 @@ import com.qmuiteam.qmui.widget.QMUIViewPager;
 import com.xz.magicbox.R;
 import com.xz.magicbox.activity.jiami.fragment.Md5Fragment;
 import com.xz.magicbox.activity.jiami.fragment.MorseFragment;
+import com.xz.magicbox.activity.jiami.fragment.RandomFragment;
 import com.xz.magicbox.base.BaseActivity;
 import com.xz.magicbox.custom.NoScrollViewPager;
 
@@ -52,6 +53,7 @@ public class EncryptionActivity extends BaseActivity {
 
         fragments.add(new Md5Fragment());
         fragments.add(new MorseFragment());
+        fragments.add(new RandomFragment());
 
         viewFun.setAdapter(new MyAdapter(getSupportFragmentManager()));
         spannerSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

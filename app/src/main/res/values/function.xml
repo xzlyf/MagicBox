@@ -3,7 +3,7 @@
     <string-array name="coding">
         <item>MD5加密</item>
         <item>莫斯密码</item>
-        <item>测试2</item>
+        <item>随机数</item>
         <item>测试3</item>
     </string-array>
 </resources>

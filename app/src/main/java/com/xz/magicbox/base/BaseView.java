@@ -1,4 +1,4 @@
-package com.xz.magicbox.activity;
+package com.xz.magicbox.base;
 
 public interface BaseView {
     void showLoading(String text);
