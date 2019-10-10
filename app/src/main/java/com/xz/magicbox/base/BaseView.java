@@ -1,5 +1,7 @@
 package com.xz.magicbox.base;
 
+import android.os.Bundle;
+
 public interface BaseView {
     void showLoading(String text);
     void disLoading();

@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private TipsDialog tipDialog;
     private LoadingDialog loadingDialog;
+    private Bundle bundle;
 
     abstract protected int getLayoutResource();
 
@@ -65,6 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 bar.setDisplayHomeAsUpEnabled(true);
             }
         }
+        this.bundle = savedInstanceState;
         initData();
 
 
@@ -78,6 +80,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 break;
         }
         return true;
+    }
+
+    public Bundle getBundle(){
+        return bundle;
     }
 
     @Override
