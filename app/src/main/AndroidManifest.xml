@@ -13,12 +13,13 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo_2"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/logo_2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.jiami.EncryptionActivity"></activity>
+        <activity android:name=".activity.terminal.TerminalActivity"></activity>
+        <activity android:name=".activity.jiami.EncryptionActivity" />
         <activity android:name=".activity.system.SysInfoActivity" />
         <activity android:name=".activity.zhihu.DetailActivity" />
         <activity android:name=".activity.zhihu.DailyRe" />

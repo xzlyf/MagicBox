@@ -17,6 +17,7 @@ import com.xz.magicbox.R;
 import com.xz.magicbox.activity.jiami.EncryptionActivity;
 import com.xz.magicbox.activity.qr_code.QRCodeActivity;
 import com.xz.magicbox.activity.system.SysInfoActivity;
+import com.xz.magicbox.activity.terminal.TerminalActivity;
 import com.xz.magicbox.activity.zhihu.DailyRe;
 import com.xz.magicbox.adapter.FunctionAdapter;
 import com.xz.magicbox.base.BaseActivity;
@@ -65,6 +66,7 @@ public class MainActivity extends BaseActivity {
         list.add(new Func("知乎日报", DailyRe.class));
         list.add(new Func("系统信息", SysInfoActivity.class));
         list.add(new Func("加密", EncryptionActivity.class));
+        list.add(new Func("迷你终端", TerminalActivity.class));
         adapter.refresh(list);
 
     }
