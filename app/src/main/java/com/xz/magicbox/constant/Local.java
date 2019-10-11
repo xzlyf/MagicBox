@@ -1,6 +1,8 @@
 package com.xz.magicbox.constant;
 
 import android.Manifest;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.xz.magicbox.R;
@@ -24,7 +26,9 @@ public class Local {
     //待申请权限列表
     public static final String[] permission = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
+            Manifest.permission.CAMERA,
+//            Manifest.permission.FOREGROUND_SERVICE,
+            Manifest.permission.ACCESS_FINE_LOCATION
     };
 
     //知乎接口

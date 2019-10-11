@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity {
         initRecycler();
         getScreenHW();
 
+
     }
 
     private void initRecycler() {

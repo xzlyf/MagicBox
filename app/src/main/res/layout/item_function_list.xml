@@ -15,6 +15,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="热搜排行榜"
-        android:textColor="@color/btn_filled_blue_bg_pressed"
+        android:textColor="@color/gory_black"
         android:textSize="16sp" />
+
 </FrameLayout>
